@@ -27,5 +27,5 @@
 </script>
 
 <svelte:element this={tag} class={cn("grid gap-2", className)} {...$$restProps}>
-	<slot {...$$restProps} {field} />
+	<slot {field} />
 </svelte:element>

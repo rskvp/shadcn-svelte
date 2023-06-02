@@ -17,11 +17,7 @@
 	export let data: Validation<typeof profileSchema>;
 
 	const form = superForm(data, {
-		taintedMessage: null,
-		onSubmit: ({ action, data, form, controller }) => {
-			console.log("Data", data.get("urls[0]"));
-			console.log("Form", form);
-		}
+		taintedMessage: null
 	});
 
 	$: ({ form: superFrm, delayed, errors, tainted } = form);
@@ -55,13 +51,13 @@
 		<FormMessage />
 	</FormField>
 	<div class="space-y-2">
-		{#each $superFrm.urls as url, index (`${url}-${index}`)}
+		{#each $superFrm.urls as url, index}
 			<FormField {form} let:field name={`urls[${index}]`}>
 				<FormLabel class={cn(index !== 0 && "sr-only")}>URLs</FormLabel>
 				<FormDescription class={cn(index !== 0 && "sr-only")}
 					>Add links to your website, blog, or social media profiles</FormDescription
 				>
-				<FormInput type="password" {...field} />
+				<FormInput type="text" {...field} />
 				<FormMessage />
 			</FormField>
 		{/each}
