@@ -1,9 +1,6 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from "svelte/elements";
-	import { createEventDispatcher } from "svelte";
 	import { cn } from "$lib/utils";
-
-	const dispatch = createEventDispatcher();
 
 	let className: string | undefined | null = undefined;
 
@@ -32,10 +29,6 @@
 	on:mouseenter
 	on:mouseleave
 	on:paste
-	on:input={(e) => {
-		dispatch(name ?? "input", e);
-		value = e.currentTarget.value;
-	}}
 	{name}
 	{id}
 	{...$$restProps}

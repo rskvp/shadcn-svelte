@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { tick } from "svelte";
 	import type { SuperForm } from "sveltekit-superforms/client";
 	import type { AnyZodObject } from "zod";
 	import type { SuperFormPath } from ".";
@@ -27,8 +28,35 @@
 		constraints: $constraints,
 		value
 	});
+
+	let uuid: string | null = null;
+
+	$: fieldWithListeners = () => {
+		const uuidWasNull = uuid === null;
+		uuid = uuidWasNull ? Math.random().toString(36).slice(2) : uuid;
+		if (typeof window !== "undefined" && uuidWasNull) {
+			tick().then(() => {
+				const el = document.querySelector(`[data-uuid="${uuid}"]`);
+				if (!el) return;
+				const cb = (e: Event) => {
+					const target = e.target as HTMLInputElement;
+					field.value?.set(target.value);
+				};
+				el.addEventListener("keydown", cb);
+				el.addEventListener("keyup", cb);
+				el.addEventListener("change", cb);
+			});
+		}
+		return {
+			...field,
+			constraints: undefined,
+			errors: undefined,
+			value: $value,
+			"data-uuid": uuid
+		};
+	};
 </script>
 
 <svelte:element this={tag} class={cn("grid gap-2", className)} {...$$restProps}>
-	<slot {field} />
+	<slot {field} {fieldWithListeners} />
 </svelte:element>

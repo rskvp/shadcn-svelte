@@ -13,6 +13,7 @@
 	import { Button } from "$components/ui/button";
 	import { cn } from "$lib/utils";
 	import { Loader2 } from "lucide-svelte";
+	import { Input } from "$components/ui/input";
 
 	export let data: Validation<typeof profileSchema>;
 
@@ -25,9 +26,9 @@
 
 <SuperDebug data={{ $superFrm, $errors, $tainted }} />
 <form action="?/updateProfile" method="POST" class="space-y-8" use:form.enhance>
-	<FormField {form} let:field name="username">
+	<FormField {form} let:fieldWithListeners name="username">
 		<FormLabel>Username</FormLabel>
-		<FormInput type="text" {...field} />
+		<Input type="text" {...fieldWithListeners()} />
 		<FormDescription>
 			This is your public display name. It can be your real name or a
 			pseudonym. You can only change this once every 30 days.
