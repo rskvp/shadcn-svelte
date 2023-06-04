@@ -1,9 +1,9 @@
 import type { Writable } from "svelte/store";
 import type { SuperForm } from "sveltekit-superforms/client";
-import type { StringPathType } from "sveltekit-superforms/dist/stringPath";
 import type {
 	InputConstraint,
-	StringPathLeaves,
+	FormPath,
+	FormPathLeaves,
 	UnwrapEffects,
 	ZodValidation
 } from "sveltekit-superforms/index";
@@ -18,7 +18,7 @@ export { default as FormDescription } from "./FormDescription.svelte";
 
 type SuperFormField<
 	T extends ZodValidation<AnyZodObject>,
-	Path extends string & StringPathLeaves<z.infer<UnwrapEffects<T>>>
+	Path extends string & FormPathLeaves<z.infer<UnwrapEffects<T>>>
 > = {
 	id: string | undefined | null;
 	"aria-describedby": string | undefined | null;
@@ -26,8 +26,8 @@ type SuperFormField<
 	"aria-required": boolean;
 	constraints: InputConstraint | undefined;
 	errors: string[] | undefined;
-	name: string & StringPathLeaves<z.infer<T>>;
-	value?: Writable<StringPathType<z.infer<UnwrapEffects<T>>, Path>>;
+	name: FormPathLeaves<z.infer<T>>;
+	value?: Writable<FormPath<z.infer<UnwrapEffects<T>>>>;
 	checked?: boolean | undefined;
 };
 
@@ -35,11 +35,8 @@ type SuperFormFieldParams<T extends ZodValidation<AnyZodObject>> = {
 	id: string | undefined | null;
 	constraints: InputConstraint | undefined;
 	errors: string[] | undefined;
-	name: string & StringPathLeaves<z.infer<T>>;
-	value?: StringPathType<
-		z.TypeOf<UnwrapEffects<UnwrapEffects<T>>>,
-		string & StringPathLeaves<z.TypeOf<T>>
-	>;
+	name: string & FormPathLeaves<z.infer<T>>;
+	value?: Writable<FormPath<z.TypeOf<UnwrapEffects<UnwrapEffects<T>>>>>;
 	checkbox?: boolean;
 };
 
@@ -48,11 +45,11 @@ export type ErrorsContext = Writable<string[] | undefined>;
 export type SuperFormUnwrap<T, U = unknown> = SuperForm<UnwrapEffects<T>, U>;
 
 export type SuperFormPath<T extends AnyZodObject> = string &
-	StringPathLeaves<z.infer<T>>;
+	FormPathLeaves<z.infer<T>>;
 
 export function superFormFieldProxy<
 	T extends ZodValidation<AnyZodObject>,
-	Path extends string & StringPathLeaves<z.infer<UnwrapEffects<T>>>
+	Path extends FormPathLeaves<z.infer<UnwrapEffects<T>>>
 >(form: SuperForm<T, unknown>, name: Path) {
 	const { value, errors, constraints, path } = formFieldProxy(form, name);
 	setContext("errors", errors);
