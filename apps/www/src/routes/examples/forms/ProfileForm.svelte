@@ -2,7 +2,6 @@
 	import {
 		FormDescription,
 		FormField,
-		FormInput,
 		FormLabel,
 		FormMessage
 	} from "$components/ui/form";
@@ -14,6 +13,7 @@
 	import { cn } from "$lib/utils";
 	import { Loader2 } from "lucide-svelte";
 	import { Input } from "$components/ui/input";
+	import { Textarea } from "$components/ui/textarea";
 
 	export let data: Validation<typeof profileSchema>;
 
@@ -35,17 +35,17 @@
 		</FormDescription>
 		<FormMessage />
 	</FormField>
-	<FormField {form} let:field name="email">
+	<FormField {form} let:fieldWithListeners name="email">
 		<FormLabel>Email</FormLabel>
-		<FormInput type="text" {...field} />
+		<Input type="text" {...fieldWithListeners()} />
 		<FormDescription>
 			You can manage verified email addresses in your email settings.
 		</FormDescription>
 		<FormMessage />
 	</FormField>
-	<FormField {form} let:field name="bio">
+	<FormField {form} let:fieldWithListeners name="bio">
 		<FormLabel>Bio</FormLabel>
-		<FormInput type="textarea" {...field} />
+		<Textarea {...fieldWithListeners()} />
 		<FormDescription>
 			You can @mention other users and organizations to link to them.
 		</FormDescription>
@@ -53,12 +53,12 @@
 	</FormField>
 	<div class="space-y-2">
 		{#each $superFrm.urls as url, index}
-			<FormField {form} let:field name={`urls[${index}]`}>
+			<FormField {form} let:fieldWithListeners name={`urls[${index}]`}>
 				<FormLabel class={cn(index !== 0 && "sr-only")}>URLs</FormLabel>
 				<FormDescription class={cn(index !== 0 && "sr-only")}
 					>Add links to your website, blog, or social media profiles</FormDescription
 				>
-				<FormInput type="text" {...field} />
+				<Input type="text" {...fieldWithListeners()} />
 				<FormMessage />
 			</FormField>
 		{/each}

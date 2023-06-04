@@ -14,7 +14,6 @@ import { formFieldProxy } from "sveltekit-superforms/client";
 export { default as FormField } from "./FormField.svelte";
 export { default as FormLabel } from "./FormLabel.svelte";
 export { default as FormMessage } from "./FormMessage.svelte";
-export { default as FormInput } from "./FormInput.svelte";
 export { default as FormDescription } from "./FormDescription.svelte";
 
 type SuperFormField<
@@ -29,7 +28,7 @@ type SuperFormField<
 	errors: string[] | undefined;
 	name: string & StringPathLeaves<z.infer<T>>;
 	value?: Writable<StringPathType<z.infer<UnwrapEffects<T>>, Path>>;
-	checked?: Writable<boolean>;
+	checked?: boolean | undefined;
 };
 
 type SuperFormFieldParams<T extends ZodValidation<AnyZodObject>> = {
@@ -74,7 +73,7 @@ export function superFormField(
 
 	return {
 		id,
-		"aria-describedby": !errors ? name : `${name} ${errors}`,
+		"aria-describedby": !errors ? id : `${id} ${errors}`,
 		"aria-invalid": !!errors,
 		"aria-required": !!constraints?.required,
 		constraints,
