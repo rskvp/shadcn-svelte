@@ -42,11 +42,31 @@
 		}
 	});
 
-	const options = [
-		{ id: "edit", label: "Edit" },
-		{ id: "delete", label: "Delete" },
-		{ id: "destroy", label: "Destroy" }
-	];
+	const {
+		useTrigger: subTrigger,
+		triggerAttrs: subTriggerAttrs,
+		useMenu: subMenu,
+		menuAttrs: subMenuAttrs,
+		itemAttrs: subItemAttrs,
+		open: subOpen,
+		separatorAttrs: subSeparatorAttrs
+	} = createMenu({
+		onSelect: (id) => {
+			$open = false;
+			console.log(id);
+			alert(id);
+		},
+		positioning: {
+			placement: "right-start",
+			strategy: "absolute",
+			offset: {
+				mainAxis: 50,
+				crossAxis: 0
+			},
+			overlap: true
+		},
+		portal: document.body
+	});
 </script>
 
 <button
@@ -54,7 +74,6 @@
 	class={buttonVariants({ variant: "outline" })}
 	{...$triggerAttrs}>Actions</button
 >
-
 {#if $open}
 	<DropdownMenuContent class="w-56" {useMenu} {...$menuAttrs}>
 		<DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -84,6 +103,15 @@
 			<Users class="mr-2 h-4 w-4" />
 			<span>Team</span>
 		</DropdownMenuItem>
+		<DropdownMenuSubTrigger trigger={subTrigger}
+			>Invite People</DropdownMenuSubTrigger
+		>
+		{#if $subOpen}
+			<DropdownMenuSubContent>
+				<DropdownMenuItem>Hello</DropdownMenuItem>
+			</DropdownMenuSubContent>
+		{/if}
+
 		<DropdownMenuItem {...$itemAttrs("new-team")}>
 			<Plus class="mr-2 h-4 w-4" />
 			<span>New Team</span>
