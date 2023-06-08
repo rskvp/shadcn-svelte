@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { cn } from "$lib/utils";
+	import type { Action } from "svelte/action";
 
 	let className: string | undefined | null = null;
 	export { className as class };
-	export let useMenu: any;
+	export let useMenu: Action<HTMLElement, void>;
 </script>
 
 <div
