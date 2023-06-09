@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { cn } from "$lib/utils";
 	import { ChevronRight } from "lucide-svelte";
-	import type { Action } from "svelte/action";
+	import { getContext } from "svelte";
+	import type { TriggerContext } from ".";
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
 	export let inset = false;
-	export let trigger: Action<HTMLElement, void>;
+	const { useTrigger, triggerAttrs } =
+		getContext<TriggerContext>("triggerCtx");
 </script>
 
 <button
@@ -15,8 +17,9 @@
 		inset && "pl-8",
 		className
 	)}
+	use:useTrigger
+	{...$triggerAttrs}
 	{...$$restProps}
-	use:trigger
 >
 	<slot />
 	<ChevronRight class="ml-auto h-4 w-4" />
