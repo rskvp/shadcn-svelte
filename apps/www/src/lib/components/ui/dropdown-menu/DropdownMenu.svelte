@@ -37,9 +37,9 @@
 		separatorAttrs
 	} = createMenu({
 		onSelect: (id) => {
-			$open = false;
 			console.log(id);
 			alert(id);
+			$open = false;
 		}
 	});
 </script>
@@ -79,25 +79,23 @@
 				<Users class="mr-2 h-4 w-4" />
 				<span>Team</span>
 			</DropdownMenuItem>
-			<DropdownMenuSub let:subOpen>
-				<DropdownMenuSubTrigger>Invite People</DropdownMenuSubTrigger>
-				{#if subOpen}
-					<DropdownMenuSubContent>
-						<DropdownMenuItem>
-							<Mail class="mr-2 h-4 w-4" />
-							<span>Email</span>
-						</DropdownMenuItem>
-						<DropdownMenuItem>
-							<MessageSquare class="mr-2 h-4 w-4" />
-							<span>Message</span>
-						</DropdownMenuItem>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem>
-							<PlusCircle class="mr-2 h-4 w-4" />
-							<span>More...</span>
-						</DropdownMenuItem>
-					</DropdownMenuSubContent>
-				{/if}
+			<DropdownMenuSub>
+				<DropdownMenuSubTrigger>Invite Users</DropdownMenuSubTrigger>
+				<DropdownMenuSubContent>
+					<DropdownMenuItem {...$itemAttrs("email")}>
+						<Mail class="mr-2 h-4 w-4" />
+						<span>Email</span>
+					</DropdownMenuItem>
+					<DropdownMenuItem {...$itemAttrs("message")}>
+						<MessageSquare class="mr-2 h-4 w-4" />
+						<span>Message</span>
+					</DropdownMenuItem>
+					<DropdownMenuSeparator />
+					<DropdownMenuItem {...$itemAttrs("more")}>
+						<PlusCircle class="mr-2 h-4 w-4" />
+						<span>More...</span>
+					</DropdownMenuItem>
+				</DropdownMenuSubContent>
 			</DropdownMenuSub>
 
 			<DropdownMenuItem {...$itemAttrs("new-team")}>
@@ -125,6 +123,6 @@
 				<DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
 			</DropdownMenuItem>
 		</DropdownMenuContent>
-		<div id="sub-menu" />
 	{/if}
+	<div id="sub-menu" />
 </div>

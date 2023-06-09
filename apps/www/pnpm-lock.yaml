@@ -10,6 +10,9 @@ patchedDependencies:
     path: ./patches/mdsvex@0.10.6.patch
 
 dependencies:
+  '@floating-ui/dom':
+    specifier: ^1.2.9
+    version: 1.2.9
   '@tanstack/svelte-table':
     specifier: ^8.9.1
     version: 8.9.1(svelte@3.59.1)
@@ -429,8 +432,8 @@ packages:
   /@floating-ui/core@1.2.6:
     resolution: {integrity: sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg==}
 
-  /@floating-ui/dom@1.2.8:
-    resolution: {integrity: sha512-XLwhYV90MxiHDq6S0rzFZj00fnDM+A1R9jhSioZoMsa7G0Q0i+Q4x40ajR8FHSdYDE1bgjG45mIWe6jtv9UPmg==}
+  /@floating-ui/dom@1.2.9:
+    resolution: {integrity: sha512-sosQxsqgxMNkV3C+3UqTS6LxP7isRLwX8WMepp843Rb3/b0Wz8+MdUkxJksByip3C2WwLugLHN1b4ibn//zKwQ==}
     dependencies:
       '@floating-ui/core': 1.2.6
 
@@ -439,7 +442,7 @@ packages:
     peerDependencies:
       svelte: 3.x
     dependencies:
-      '@floating-ui/dom': 1.2.8
+      '@floating-ui/dom': 1.2.9
       focus-trap: 7.4.3
       svelte: 3.59.1
     dev: true
@@ -2978,7 +2981,7 @@ packages:
       svelte: ^3.58.0
     dependencies:
       '@floating-ui/core': 1.2.6
-      '@floating-ui/dom': 1.2.8
+      '@floating-ui/dom': 1.2.9
       svelte: 3.59.1
     dev: false
 
