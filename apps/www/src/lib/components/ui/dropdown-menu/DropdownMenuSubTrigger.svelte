@@ -3,13 +3,15 @@
 	import { ChevronRight } from "lucide-svelte";
 	import { getContext } from "svelte";
 	import type { Writable } from "svelte/store";
+	import type { TriggerContext } from ".";
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
 	export let inset = false;
 
-	const submenuOpen = getContext<Writable<boolean>>(`submenuOpen`);
-	const id = getContext<string>("submenuTriggerId");
+	const submenuOpen = getContext<Writable<boolean>>("submenuOpen");
+	const { triggerAttrs, useTrigger } =
+		getContext<TriggerContext>("triggerCtx");
 </script>
 
 <button
@@ -19,8 +21,8 @@
 		className
 	)}
 	{...$$restProps}
-	on:click={() => ($submenuOpen = !$submenuOpen)}
-	{id}
+	use:useTrigger
+	{...$triggerAttrs}
 >
 	<slot />
 	<ChevronRight class="ml-auto h-4 w-4" />

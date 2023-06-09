@@ -1,8 +1,6 @@
 import type { Action } from "svelte/action";
-import type { Readable, Writable } from "svelte/store";
-import { readable } from "svelte/store";
+import type { Readable } from "svelte/store";
 import {
-	arrow,
 	computePosition,
 	autoUpdate,
 	type Middleware,
@@ -12,11 +10,6 @@ import {
 	shift,
 	size
 } from "@floating-ui/dom";
-export type TriggerContext = {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	useTrigger: Action<HTMLElement, void, Record<never, any>>;
-	triggerAttrs: Readable<Record<string, string | undefined>>;
-};
 
 export type MenuContext = {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,20 +17,15 @@ export type MenuContext = {
 	menuAttrs: Readable<Record<string, string>>;
 };
 
-export type ItemContext = Readable<
-	(
-		params:
-			| string
-			| {
-					id: string;
-					label: string;
-			  }
-	) => Record<string, string>
->;
+export type TriggerContext = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	useTrigger: Action<HTMLElement, void, Record<never, any>>;
+	triggerAttrs: Readable<Record<string, string | undefined>>;
+};
 
-export type OpenContext = Writable<boolean>;
-
-export type SeparatorContext = Readable<Record<string, string>>;
+export const noop = () => {
+	/* Do nothing */
+};
 
 export type PositioningOptions = {
 	/**
@@ -120,19 +108,6 @@ const defaultOptions: PositioningOptions = {
 	overflowPadding: 8
 };
 
-const ARROW_TRANSFORM = {
-	bottom: "rotate(45deg)",
-	left: "rotate(135deg)",
-	top: "rotate(225deg)",
-	right: "rotate(315deg)"
-};
-
-export const arrowAttrs = (arrowSize = 8) =>
-	readable({
-		"data-arrow": "true",
-		style: `position: absolute; width: var(--arrow-size, ${arrowSize}px); height: var(--arrow-size, ${arrowSize}px);`
-	});
-
 export function getPlacement(
 	reference: HTMLElement | null,
 	floating: HTMLElement | null,
@@ -143,7 +118,6 @@ export function getPlacement(
 
 	const options = Object.assign({}, defaultOptions, opts);
 
-	const arrowEl = floating.querySelector<HTMLElement>("[data-arrow=true]");
 	const middleware: Middleware[] = [];
 
 	if (options.flip) {
@@ -155,12 +129,10 @@ export function getPlacement(
 		);
 	}
 
-	const arrowOffset = arrowEl ? arrowEl.offsetHeight / 2 : 0;
 	if (options.gutter || options.offset) {
 		const data = options.gutter
 			? { mainAxis: options.gutter }
 			: options.offset;
-		if (data?.mainAxis != null) data.mainAxis += arrowOffset;
 		middleware.push(offset(data));
 	}
 
@@ -171,10 +143,6 @@ export function getPlacement(
 			padding: options.overflowPadding
 		})
 	);
-
-	if (arrowEl) {
-		middleware.push(arrow({ element: arrowEl, padding: 8 }));
-	}
 
 	middleware.push(
 		size({
@@ -213,26 +181,6 @@ export function getPlacement(
 				top: `${y}px`,
 				left: `${x}px`
 			});
-
-			if (arrowEl && data.middlewareData.arrow) {
-				const { x, y } = data.middlewareData.arrow;
-
-				const dir = data.placement.split("-")[0] as
-					| "top"
-					| "bottom"
-					| "left"
-					| "right";
-
-				Object.assign(arrowEl.style, {
-					position: "absolute",
-					left: x != null ? `${x}px` : "",
-					top: y != null ? `${y}px` : "",
-					[dir]: `calc(100% - ${arrowOffset}px)`,
-					transform: ARROW_TRANSFORM[dir],
-					backgroundColor: "inherit",
-					zIndex: "inherit"
-				});
-			}
 
 			return data;
 		});
