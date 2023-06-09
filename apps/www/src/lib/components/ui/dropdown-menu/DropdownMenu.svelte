@@ -26,6 +26,9 @@
 	import DropdownMenuShortcut from "./DropdownMenuShortcut.svelte";
 	import DropdownMenuSubTrigger from "./DropdownMenuSubTrigger.svelte";
 	import DropdownMenuSub from "./DropdownMenuSub.svelte";
+	import { writable } from "svelte/store";
+
+	const submenuOpen = writable(false);
 
 	const {
 		useTrigger,
@@ -36,11 +39,7 @@
 		open,
 		separatorAttrs
 	} = createMenu({
-		onSelect: (id) => {
-			console.log(id);
-			alert(id);
-			$open = false;
-		}
+		onSelect: (id) => {}
 	});
 </script>
 

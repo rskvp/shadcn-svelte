@@ -14,16 +14,20 @@
 		getContext<TriggerContext>("triggerCtx");
 </script>
 
-<button
-	class={cn(
-		"flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent hover:bg-accent w-full",
-		inset && "pl-8",
-		className
-	)}
-	{...$$restProps}
-	use:useTrigger
-	{...$triggerAttrs}
->
-	<slot />
-	<ChevronRight class="ml-auto h-4 w-4" />
-</button>
+<div>
+	<button
+		class={cn(
+			"flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent hover:bg-accent w-full",
+			inset && "pl-8",
+			className
+		)}
+		{...$$restProps}
+		id="menu1"
+		role="menuitem"
+		data-item-id="menu1"
+		use:useTrigger
+	>
+		<slot />
+		<ChevronRight class="ml-auto h-4 w-4" />
+	</button>
+</div>
