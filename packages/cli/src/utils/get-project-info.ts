@@ -19,9 +19,7 @@ export async function getProjectInfo() {
 			tsconfig,
 			alias,
 			srcDir: existsSync(path.resolve("./src")),
-			appDir:
-				existsSync(path.resolve("./app")) ||
-				existsSync(path.resolve("./src/app"))
+			componentsDir: existsSync(path.resolve("./src/components/ui"))
 		};
 	} catch (error) {
 		return info;
