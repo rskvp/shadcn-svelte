@@ -6,6 +6,7 @@ import { Project, ScriptKind } from "ts-morph";
 import { z } from "zod";
 import { Config } from "../get-config";
 import { registryBaseColorSchema } from "../registry/schema";
+import { transformImport } from "./transform-import";
 
 export type TransformOpts = {
 	filename: string;
@@ -14,8 +15,8 @@ export type TransformOpts = {
 	baseColor?: z.infer<typeof registryBaseColorSchema>;
 };
 
-export type Transformer<Output = SourceFile> = (
-	opts: TransformOpts & { sourceFile: SourceFile }
+export type Transformer<Output = string> = (
+	opts: TransformOpts & { sourceCode: string }
 ) => Promise<Output>;
 
 const project = new Project({
@@ -24,4 +25,14 @@ const project = new Project({
 
 export async function createTempSourceFile(filename: string) {
 	const dir = await fs.mkdtemp(path.join(tmpdir(), "shadcn-"));
+	return path.join(dir, filename);
+}
+
+export async function transform(opts: TransformOpts) {
+	let transformedSource = await transformImport({
+		sourceCode: opts.raw,
+		...opts
+	});
+
+	return transformedSource;
 }
