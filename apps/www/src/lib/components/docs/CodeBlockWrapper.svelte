@@ -1,9 +1,6 @@
 <script lang="ts">
-	import { buttonVariants } from "$components/ui/button";
-	import {
-		Collapsible,
-		CollapsibleTrigger
-	} from "$components/ui/collapsible";
+	import * as Collapsible from "@/registry/default/ui/collapsible";
+	import { Button } from "@/registry/default/ui/button";
 	import { cn } from "$lib/utils";
 
 	let className: string | undefined | null = undefined;
@@ -12,30 +9,29 @@
 	let open = false;
 </script>
 
-<Collapsible bind:open>
-	<div
-		class={cn("relative overflow-hidden rounded-md mb-4", className)}
-		{...$$restProps}
-	>
+<Collapsible.Root bind:open>
+	<div class={cn("relative overflow-hidden", className)} {...$$restProps}>
 		<div class={cn("overflow-hidden h-full", !open && "max-h-32")}>
 			<slot />
 		</div>
 		<div
 			class={cn(
-				"absolute flex items-center justify-center bg-gradient-to-b from-background/30 to-muted/90 p-2",
-				open ? "inset-x-0 bottom-0 h-12" : "inset-0"
+				"[&_pre]:my-0 [&_pre]:max-h-[650px] [&_pre]:pb-[100px]",
+				open ? "[&_pre]:overflow-hidden" : "[&_pre]:overflow-auto]"
 			)}
 		>
-			<span class={!open ? "pt-4" : ""}>
-				<CollapsibleTrigger
-					class={cn(
-						buttonVariants({ variant: "secondary" }),
-						"h-8 text-xs"
-					)}
-				>
-					{open ? "Collapse" : expandButtonTitle}
-				</CollapsibleTrigger>
-			</span>
+			<div
+				class={cn(
+					"absolute flex items-center justify-center bg-gradient-to-b from-zinc-700/30 to-zinc-950/90 p-2",
+					open ? "inset-x-0 bottom-0 h-12" : "inset-0"
+				)}
+			>
+				<Collapsible.Trigger asChild>
+					<Button variant="secondary" class="h-8 text-xs">
+						{open ? "Collapse" : expandButtonTitle}
+					</Button>
+				</Collapsible.Trigger>
+			</div>
 		</div>
 	</div>
-</Collapsible>
+</Collapsible.Root>

@@ -10,16 +10,14 @@ external:
 ---
 
 <script>
-  import { CheckboxDemo, CheckboxDemoDisabled, CheckboxDemoText, ComponentExample, ManualInstall } from '$lib/components/docs';
+  import { ComponentPreview, ManualInstall } from '$lib/components/docs';
 </script>
 
-<ComponentExample src="src/lib/components/docs/examples/checkbox/CheckboxDemo.svelte">
+<ComponentPreview name="checkbox-demo">
 
-<div slot="example">
-<CheckboxDemo />
-</div>
+<div />
 
-</ComponentExample>
+</ComponentPreview>
 
 ## Installation
 
@@ -29,10 +27,10 @@ npx shadcn-svelte add checkbox
 
 <ManualInstall>
 
-1. Install `radix-svelte`:
+1. Install `@huntabyte/primitives`:
 
 ```bash
-npm install radix-svelte
+npm install @huntabyte/primitives
 ```
 
 2. Copy and paste the component source files linked at the top of this page into your project.
@@ -55,20 +53,18 @@ npm install radix-svelte
 
 ### With Text
 
-<ComponentExample src="src/lib/components/docs/examples/checkbox/CheckboxDemoText.svelte">
+<ComponentPreview name="checkbox-with-text">
 
-<div slot="example">
-<CheckboxDemoText />
-</div>
+<div />
 
-</ComponentExample>
+</ComponentPreview>
+
+---
 
 ### Disabled
 
-<ComponentExample src="src/lib/components/docs/examples/checkbox/CheckboxDemoDisabled.svelte">
+<ComponentPreview name="checkbox-disabled">
 
-<div slot="example">
-<CheckboxDemoDisabled />
-</div>
+<div />
 
-</ComponentExample>
+</ComponentPreview>

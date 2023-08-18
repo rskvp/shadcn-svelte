@@ -10,16 +10,14 @@ external:
 ---
 
 <script>
-  import { TooltipDemo, ComponentExample, ManualInstall } from '$lib/components/docs';
+  import { ComponentPreview, ManualInstall } from '$lib/components/docs';
 </script>
 
-<ComponentExample src="src/lib/components/docs/examples/tooltip/TooltipDemo.svelte">
+<ComponentPreview name="tooltip-demo">
 
-<div slot="example">
-<TooltipDemo />
-</div>
+<div />
 
-</ComponentExample>
+</ComponentPreview>
 
 ## Installation
 
@@ -29,10 +27,10 @@ npx shadcn-svelte add tooltip
 
 <ManualInstall>
 
-1. Install `radix-svelte`:
+1. Install `@huntabyte/primitives`:
 
 ```bash
-npm install radix-svelte
+npm install @huntabyte/primitives
 ```
 
 2. Copy and paste the component source files linked at the top of this page into your project.
@@ -43,22 +41,13 @@ npm install radix-svelte
 
 ```svelte
 <script lang="ts">
-  import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger
-  } from "$components/ui/tooltip";
+  import * as Tooltip from "$components/ui/tooltip";
 </script>
-```
 
-```svelte
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger>Hover</TooltipTrigger>
-    <TooltipContent>
-      <p>Add to library</p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>
+<Tooltip.Root>
+  <Tooltip.Trigger>Hover</Tooltip.Trigger>
+  <Tooltip.Content>
+    <p>Add to library</p>
+  </Tooltip.Content>
+</Tooltip.Root>
 ```

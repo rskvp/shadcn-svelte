@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Input } from "$components/ui/input";
-	import { Label } from "$components/ui/label";
+	import { Input } from "@/registry/default/ui/input";
+	import { Label } from "@/registry/default/ui/label";
 	import { hexToHsl, hexToRgb } from "$lib/utils";
 	import { CopyButton } from ".";
 
@@ -26,7 +26,7 @@
 	<div class="w-full max-w-sm mx-auto space-y-6 py-4">
 		<div class="grid gap-2">
 			<Label for="hex">HEX</Label>
-			<Input name="hex" bind:value={hex} maxlength="7" />
+			<Input name="hex" bind:value={hex} maxlength={7} />
 		</div>
 		<div class="grid gap-2 relative">
 			<CopyButton class="absolute right-2 top-[30px]" value={hslString} />

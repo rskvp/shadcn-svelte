@@ -10,16 +10,15 @@ external:
 ---
 
 <script>
-    import { AccordionDemo, ComponentExample, ManualInstall } from '$components/docs';
+    import { ComponentPreview, ManualInstall } from '$components/docs';
+    import { AccordionDemo } from '@/registry/default/example'
 </script>
 
-<ComponentExample src="src/lib/components/docs/examples/accordion/AccordionDemo.svelte">
+<ComponentPreview name="accordion-demo" class="[&_[data-melt-accordion]]:sm:max-w-[70%]">
 
-<div slot="example" style="max-width: 70%; width: 100%;">
-<AccordionDemo />
-</div>
+<div />
 
-</ComponentExample>
+</ComponentPreview>
 
 ## Installation
 
@@ -29,10 +28,10 @@ npx shadcn-svelte add accordion
 
 <ManualInstall>
 
-1. Install `radix-svelte`:
+1. Install `@huntabyte/primitives`:
 
 ```bash
-npm install radix-svelte
+npm install @huntabyte/primitives
 ```
 
 2. Copy and paste the component source files linked at the top of this page into your project.
@@ -43,22 +42,15 @@ npm install radix-svelte
 
 ```svelte
 <script lang="ts">
-  import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger
-  } from "$components/ui/accordion";
+  import * as Accordion from "$components/ui/accordion";
 </script>
-```
 
-```svelte
-<Accordion type="single" collapsible>
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionContent>
+<Accordion.Root>
+  <Accordion.Item value="item-1">
+    <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
+    <Accordion.Content>
       Yes. It adheres to the WAI-ARIA design pattern.
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>
+    </Accordion.Content>
+  </Accordion.Item>
+</Accordion.Root>
 ```

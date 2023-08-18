@@ -10,16 +10,14 @@ external:
 ---
 
 <script>
-  import { SliderDemo, ComponentExample, ManualInstall } from '$lib/components/docs';
+  import { ComponentPreview, ManualInstall } from '$lib/components/docs';
 </script>
 
-<ComponentExample src="src/lib/components/docs/examples/slider/SliderDemo.svelte">
+<ComponentPreview name="slider-demo">
 
-<div slot="example" style="width: 100%; display: flex; justify-content: center;">
-<SliderDemo />
-</div>
+<div />
 
-</ComponentExample>
+</ComponentPreview>
 
 ## Installation
 
@@ -29,10 +27,10 @@ npx shadcn-svelte add slider
 
 <ManualInstall>
 
-1. Install `radix-svelte`:
+1. Install `@huntabyte/primitives`:
 
 ```bash
-npm install radix-svelte
+npm install @huntabyte/primitives
 ```
 
 2. Copy and paste the component source files linked at the top of this page into your project.
@@ -45,8 +43,6 @@ npm install radix-svelte
 <script lang="ts">
   import { Slider } from "$components/ui/slider";
 </script>
-```
 
-```svelte
 <Slider value={33} max={100} step={1} />
 ```

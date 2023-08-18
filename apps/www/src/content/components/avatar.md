@@ -10,16 +10,14 @@ external:
 ---
 
 <script>
-  import { AvatarDemo, ComponentExample, ManualInstall } from '$lib/components/docs';
+  import { ComponentPreview, ManualInstall } from '$lib/components/docs';
 </script>
 
-<ComponentExample src="src/lib/components/docs/examples/avatar/AvatarDemo.svelte">
+<ComponentPreview name="avatar-demo">
 
-<div slot="example">
-<AvatarDemo />
-</div>
+<div/>
 
-</ComponentExample>
+</ComponentPreview>
 
 ## Installation
 
@@ -29,10 +27,10 @@ npx shadcn-svelte add avatar
 
 <ManualInstall>
 
-1. Install `radix-svelte`:
+1. Install `@huntabyte/primitives`:
 
 ```bash
-npm install radix-svelte
+npm install @huntabyte/primitives
 ```
 
 2. Copy and paste the component source files linked at the top of this page into your project.
@@ -43,13 +41,11 @@ npm install radix-svelte
 
 ```svelte
 <script lang="ts">
-  import { Avatar, AvatarFallback, AvatarImage } from "$components/ui/avatar";
+  import * as Avatar from "$components/ui/avatar";
 </script>
-```
 
-```svelte
-<Avatar>
-  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-  <AvatarFallback>CN</AvatarFallback>
-</Avatar>
+<Avatar.Root>
+  <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
+  <Avatar.Fallback>CN</Avatar.Fallback>
+</Avatar.Root>
 ```

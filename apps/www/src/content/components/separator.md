@@ -10,16 +10,14 @@ external:
 ---
 
 <script>
-  import { SeparatorDemo, ComponentExample, ManualInstall } from '$lib/components/docs';
+  import { ComponentPreview, ManualInstall } from '$lib/components/docs';
 </script>
 
-<ComponentExample src="src/lib/components/docs/examples/separator/SeparatorDemo.svelte">
+<ComponentPreview name="separator-demo">
 
-<div slot="example">
-<SeparatorDemo />
-</div>
+<div />
 
-</ComponentExample>
+</ComponentPreview>
 
 ## Installation
 
@@ -29,10 +27,10 @@ npx shadcn-svelte add separator
 
 <ManualInstall>
 
-1. Install `radix-svelte`:
+1. Install `@huntabyte/primitives`:
 
 ```bash
-npm install radix-svelte
+npm install @huntabyte/primitives
 ```
 
 2. Copy and paste the component source files linked at the top of this page into your project.
@@ -45,8 +43,6 @@ npm install radix-svelte
 <script lang="ts">
   import { Separator } from "$components/ui/separator";
 </script>
-```
 
-```svelte
 <Separator />
 ```

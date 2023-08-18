@@ -10,16 +10,14 @@ external:
 ---
 
 <script>
-  import { RadioGroupDemo, ComponentExample, ManualInstall } from '$lib/components/docs';
+  import { ComponentPreview, ManualInstall } from '$lib/components/docs';
 </script>
 
-<ComponentExample src="src/lib/components/docs/examples/radio-group/RadioGroupDemo.svelte">
+<ComponentPreview name="radio-group-demo">
 
-<div slot="example">
-<RadioGroupDemo />
-</div>
+<div />
 
-</ComponentExample>
+</ComponentPreview>
 
 ## Installation
 
@@ -29,10 +27,10 @@ npx shadcn-svelte add radio-group
 
 <ManualInstall>
 
-1. Install `radix-svelte`:
+1. Install `@huntabyte/primitives`:
 
 ```bash
-npm install radix-svelte
+npm install @huntabyte/primitives
 ```
 
 2. Copy and paste the component source files linked at the top of this page into your project.
@@ -44,19 +42,17 @@ npm install radix-svelte
 ```svelte
 <script lang="ts">
   import { Label } from "$components/ui/label";
-  import { RadioGroup, RadioGroupItem } from "$components/ui/radio-group";
+  import * as RadioGroup from "$components/ui/radio-group";
 </script>
-```
 
-```svelte
-<RadioGroup value="option-one">
+<RadioGroup.Root value="option-one">
   <div class="flex items-center space-x-2">
-    <RadioGroupItem value="option-one" id="option-one" />
+    <RadioGroup.Item value="option-one" id="option-one" />
     <Label for="option-one">Option One</Label>
   </div>
   <div class="flex items-center space-x-2">
-    <RadioGroupItem value="option-two" id="option-two" />
+    <RadioGroup.Item value="option-two" id="option-two" />
     <Label for="option-two">Option Two</Label>
   </div>
-</RadioGroup>
+</RadioGroup.Root>
 ```
